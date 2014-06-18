@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55b72373-5882-45bf-bfdd-d201867aab0d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="328761dc-60ad-4eeb-bdef-f08e16b09c7a"/>
+	<parameter name="Finicial" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2014-02-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Ffinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2014-02-03"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ventas.`ventas` AS ventas_ventas,
+     ventas.`ven_tipocecula` AS ventas_ven_tipocecula,
+     ventas.`ven_fecha` AS ventas_ven_fecha,
+     ventas.`ven_tfactura` AS ventas_ven_tfactura,
+     ventas.`ven_cedula` AS ventas_ven_cedula
+FROM
+     `ventas` ventas
+WHERE
+     ventas.`ven_fecha` BETWEEN $P{Finicial} and $P{Ffinal}]]>
+	</queryString>
+	<field name="ventas_ventas" class="java.lang.Integer"/>
+	<field name="ventas_ven_tipocecula" class="java.lang.String"/>
+	<field name="ventas_ven_fecha" class="java.lang.String"/>
+	<field name="ventas_ven_tfactura" class="java.lang.Float"/>
+	<field name="ventas_ven_cedula" class="java.lang.String"/>
+	<variable name="ventas_ven_tfactura_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{ventas_ven_tfactura}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="555" splitType="Stretch">
+			<pie3DChart>
+				<chart isShowLegend="false" evaluationTime="Report">
+					<reportElement x="-18" y="406" width="229" height="139" uuid="f402ecb7-7bb6-4322-80f0-8727531a9e10"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="PieChartDataset" uuid="01e535ba-5359-447f-ae2e-a845ebf6e3e8">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(5)]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[/* Replace with your key expression here */
+$V{REPORT_COUNT}]]></keyExpression>
+					<valueExpression><![CDATA[new Double(200*Math.random()*5)]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot backgroundAlpha="0.5" foregroundAlpha="0.8">
+						<seriesColor seriesOrder="0" color="#3399FF"/>
+						<seriesColor seriesOrder="1" color="#00CCFF"/>
+						<seriesColor seriesOrder="2" color="#0066CC"/>
+						<seriesColor seriesOrder="3" color="#6699FF"/>
+						<seriesColor seriesOrder="4" color="#004A94"/>
+						<seriesColor seriesOrder="5" color="#00356A"/>
+					</plot>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+				</pie3DPlot>
+			</pie3DChart>
+			<staticText>
+				<reportElement mode="Opaque" x="318" y="315" width="239" height="181" backcolor="#FFFFCC" uuid="117ac1e1-c657-4703-9049-083c11ae252f">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4">
+					<pen lineWidth="1.0" lineColor="#CC9900"/>
+					<topPen lineWidth="1.0" lineColor="#CC9900"/>
+					<leftPen lineWidth="1.0" lineColor="#CC9900"/>
+					<bottomPen lineWidth="1.0" lineColor="#CC9900"/>
+					<rightPen lineWidth="1.0" lineColor="#CC9900"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Each chart is populated on each page.
+The 3 pie charts are currently using an empty datasource and the values are
+generated using a random generator.
+
+This rectangle element is not printed (see the print when expression of this
+element)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="201" y="431" width="117" height="1" uuid="45651324-8406-4717-b3c8-359ef3a208f4">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Dotted" lineColor="#996600"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="275" y="-10" width="240" height="181" backcolor="#FFFFCC" uuid="e534e0de-667b-4b2d-af22-227b10c99ec4">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4">
+					<pen lineWidth="1.0" lineColor="#CC9900"/>
+					<topPen lineWidth="1.0" lineColor="#CC9900"/>
+					<leftPen lineWidth="1.0" lineColor="#CC9900"/>
+					<bottomPen lineWidth="1.0" lineColor="#CC9900"/>
+					<rightPen lineWidth="1.0" lineColor="#CC9900"/>
+				</box>
+				<textElement markup="none">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Flowers
+
+There are two flowers, the first one is printed only starting from the second page, the other one only in the first page.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="72" y="37" width="204" height="1" uuid="5c9bdb2e-1080-4948-828f-faa10d0e7c45">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Dotted" lineColor="#996600"/>
+				</graphicElement>
+			</line>
+		</band>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="173" y="0" width="629" height="65" forecolor="#006699" backcolor="#00CCCC" uuid="b0dfd0fb-e1a8-4c58-802a-5e745778e489"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="629" height="65" uuid="0efeea69-3a52-4c6e-a62c-a9835d7e41a1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="30" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reporte De Transacciones Mensuales]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="45" y="0" width="86" height="94" uuid="fd785abf-afc4-4184-a940-c2ce2113e618"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<frame>
+				<reportElement x="227" y="0" width="575" height="14" uuid="6d488a1e-6ee9-493f-adcf-9864cf40bb73"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="78" y="0" width="115" height="14" forecolor="#000000" uuid="2081dfad-6f44-4464-8062-a24c072da33d"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Nacionalidad]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="333" y="0" width="115" height="14" forecolor="#000000" uuid="eda778ed-145c-45e3-bd51-90075798e10e"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="460" y="0" width="115" height="14" forecolor="#000000" uuid="539524fe-7756-4bbf-be34-c2aa00366c07"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="213" y="0" width="115" height="14" forecolor="#000000" uuid="d9415a91-eba1-4b3e-b727-437b04bea28f"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Cedula]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="173" y="0" width="115" height="14" forecolor="#000000" uuid="857894f5-046b-4ce7-98dc-3c555015029b"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="227" y="14" width="575" height="1" uuid="899cd4f1-50f0-4124-a5ce-1d96abbad826"/>
+			</line>
+			<frame>
+				<reportElement x="227" y="0" width="575" height="14" uuid="6419fe01-4d5c-42ad-9903-d54bcbd86f66"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="78" y="0" width="115" height="14" uuid="303964a2-c29b-43e3-acd9-2c4c7571362e"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ventas_ven_tipocecula}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="333" y="0" width="115" height="14" uuid="9446d977-8fca-480d-aa96-01864b30b100"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ventas_ven_fecha}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="460" y="0" width="115" height="14" uuid="b0416469-0234-41b1-a019-285b000fe504"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ventas_ven_tfactura}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="213" y="0" width="115" height="14" uuid="3da220a1-33e9-4a2d-abe7-4c18353dcac5"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ventas_ven_cedula}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="173" y="0" width="115" height="14" uuid="8c799b24-2ff2-48ef-b6a9-da11b6635fdb"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_ventas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="6f95c49d-dbf7-4df5-9925-ac7882e55eb6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="560" y="4" width="115" height="20" forecolor="#000000" uuid="a1e6ec7a-ae55-4195-b986-562d7683a55c"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Total Facturado]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="687" y="4" width="100" height="20" uuid="cece2bf3-29e0-47e2-8846-01b40e61942f"/>
+				<textFieldExpression><![CDATA[$V{ventas_ven_tfactura_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="800" height="16" forecolor="#D0B48E" backcolor="#00CCCC" uuid="482a4c42-31c6-4c9b-beeb-d50bd9f05d8a"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="3e35dea4-eb71-49dd-a892-09f9f047c40e"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="6fd65dcd-1a4b-4736-a52f-0fbc6d69def2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" uuid="f45507cc-6a84-4351-958f-6e03c2c8c3a7"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

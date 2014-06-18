@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b2d70c4f-d331-4b04-a1a5-3af26c8dfe86">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="937bf2ea-b732-4934-837d-b9241926fc85"/>
+	<parameter name="fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2014-02-03"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     cita.`cita` AS cita_cita,
+     cita.`cit_tipocedula` AS cita_cit_tipocedula,
+     cita.`cit_cedula` AS cita_cit_cedula,
+     cita.`cit_nombres` AS cita_cit_nombres,
+     cita.`cit_apellidos` AS cita_cit_apellidos,
+     cita.`cit_fecha` AS cita_cit_fecha
+FROM
+     `cita` cita
+WHERE
+     cita.`cit_fecha` = $P{fecha}]]>
+	</queryString>
+	<field name="cita_cita" class="java.lang.Integer"/>
+	<field name="cita_cit_tipocedula" class="java.lang.String"/>
+	<field name="cita_cit_cedula" class="java.lang.String"/>
+	<field name="cita_cit_nombres" class="java.lang.String"/>
+	<field name="cita_cit_apellidos" class="java.lang.String"/>
+	<field name="cita_cit_fecha" class="java.sql.Date"/>
+	<variable name="cita_cita_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{cita_cita}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="318" y="394" width="239" height="181" backcolor="#FFFFCC" uuid="619af2a6-96d9-47fe-b85e-c0dbc9e6b2ec">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4">
+					<pen lineWidth="1.0" lineColor="#CC9900"/>
+					<topPen lineWidth="1.0" lineColor="#CC9900"/>
+					<leftPen lineWidth="1.0" lineColor="#CC9900"/>
+					<bottomPen lineWidth="1.0" lineColor="#CC9900"/>
+					<rightPen lineWidth="1.0" lineColor="#CC9900"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Each chart is populated on each page.
+The 3 pie charts are currently using an empty datasource and the values are
+generated using a random generator.
+
+This rectangle element is not printed (see the print when expression of this
+element)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="201" y="431" width="117" height="1" uuid="84825b74-a2bd-4579-ac0f-f43fbeb9f025">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Dotted" lineColor="#996600"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="275" y="-10" width="240" height="181" backcolor="#FFFFCC" uuid="32311a40-c165-4e04-b7f5-10ddcf52d278">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4">
+					<pen lineWidth="1.0" lineColor="#CC9900"/>
+					<topPen lineWidth="1.0" lineColor="#CC9900"/>
+					<leftPen lineWidth="1.0" lineColor="#CC9900"/>
+					<bottomPen lineWidth="1.0" lineColor="#CC9900"/>
+					<rightPen lineWidth="1.0" lineColor="#CC9900"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Flowers: there are two flowers, the first one is printed only starting from the second page, the other one only in the first page.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="72" y="37" width="204" height="1" uuid="de13b997-91a1-436e-8df3-8dfe6881f422">
+					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Dotted" lineColor="#996600"/>
+				</graphicElement>
+			</line>
+		</band>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="126" y="0" width="431" height="65" forecolor="#006699" backcolor="#00CCCC" uuid="caf895e1-1488-40d8-8631-2eeca14ef952"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="427" height="65" uuid="98118207-74b1-475b-8def-92298f4c070e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="30" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reporte De Citas]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="0" y="0" width="120" height="94" uuid="8d82f94a-15c9-4cb4-81d6-bca11eb7d6b3"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<frame>
+				<reportElement x="227" y="0" width="328" height="20" uuid="55888b29-ae74-4827-ada6-6018a5f0e05d"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="20" y="0" width="71" height="20" forecolor="#000000" uuid="0d2cbfae-4934-48f1-8be9-5b63b4686839"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Nombres]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="123" y="0" width="67" height="20" forecolor="#000000" uuid="baf2796d-2984-46f7-a622-ae20e593a882"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Apellidos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="218" y="0" width="90" height="20" forecolor="#000000" uuid="91fbbccc-6804-4a98-8fbd-75137e10380a"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Fecha Pautada]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="0" y="0" width="54" height="20" forecolor="#000000" uuid="9ad0bd9b-7e8c-4c05-9b88-31a07cfe34d4"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="72" y="0" width="83" height="20" forecolor="#000000" uuid="3e263cce-1385-45bf-ab52-599f4ce66672"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Nacionalidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" positionType="Float" x="171" y="0" width="76" height="20" forecolor="#000000" uuid="c02ec3e0-d2bc-4e57-92ca-7527415865e6"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="72" y="22" width="481" height="1" uuid="762a9ed0-10e5-4424-beac-afed1910785e"/>
+			</line>
+			<frame>
+				<reportElement x="227" y="0" width="328" height="20" uuid="b1e8562b-3c88-4caa-a7af-0817f18bd4e3"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="20" y="0" width="89" height="18" uuid="6d50f41e-5582-4533-9e75-9c6f0f69b235"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cita_cit_nombres}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="208" y="0" width="118" height="18" uuid="1090fe7a-be16-46ad-bc41-bf02aede36d6"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cita_cit_fecha}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="123" y="2" width="67" height="18" uuid="b5164a00-c4d8-40d2-b44d-56c3b298300f"/>
+					<textElement>
+						<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cita_cit_apellidos}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="2" y="0" width="54" height="18" uuid="7cc9d2a9-690a-41df-b1ca-9adccd2e9db5"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cita_cita}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="88" y="0" width="54" height="18" uuid="25de510f-414a-4234-aa86-9f45fcf7a7f5"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cita_cit_tipocedula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="171" y="0" width="67" height="18" uuid="61b0deee-7ff0-4d54-b456-b3e45a314f1e"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cita_cit_cedula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="ee493868-2146-4118-b812-6486c63a816d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="4" width="143" height="20" uuid="1d35a41f-72dc-4b6e-a9fb-23fe654432aa"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total De Citas Para Hoy]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="155" y="4" width="100" height="20" uuid="0938f38a-b3a9-436e-af86-50adc550b270"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cita_cita_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-2" y="0" width="555" height="20" forecolor="#D0B48E" backcolor="#00CCCC" uuid="56900b91-1281-4a13-9139-384bb7d01beb"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="501" y="7" width="40" height="13" forecolor="#FFFFFF" uuid="c94fed2f-2ad2-463a-a929-7b7b267d1f17"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="421" y="7" width="80" height="13" forecolor="#FFFFFF" uuid="f1d13f06-8485-436e-8d43-2bc16de32d2e"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="7" width="197" height="13" forecolor="#FFFFFF" uuid="44feb2bb-697f-489c-82c3-243aa8f71b15"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

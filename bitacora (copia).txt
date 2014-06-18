@@ -1,0 +1,16 @@
+<INICIAR,tventa>
+<ESCRIBIR,tventa,ventas,null>
+<ESCRIBIR,tventa,ven_tipocedula,V->
+<ESCRIBIR,tventa,ven_cedula,560>
+<ESCRIBIR,tventa,ven_fecha,2014-06-14>
+<ESCRIBIR,tventa,ven_tfactura,1456.0>
+<ESCRIBIR,tdetalleventa,detalleventa,1>
+<ESCRIBIR,tdetalleventa,dven_nomser,Periondoncia>
+<ESCRIBIR,tdetalleventa,dven_cantidad,1>
+<ESCRIBIR,tdetalleventa,dven_precio,800.0>
+<COMMIT,tventa>
+<INICIAR,tdetalleventa>
+<ESCRIBIR,tdetalleventa,detalleventa,1>
+<ESCRIBIR,tdetalleventa,dven_nomser,Estetica>
+<ESCRIBIR,tdetalleventa,dven_cantidad,1>
+<ESCRIBIR,tdetalleventa,dven_precio,500.0>
